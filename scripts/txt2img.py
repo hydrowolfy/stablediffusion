@@ -346,7 +346,7 @@ def main(opt):
                         uc = model.get_learned_conditioning(batch_size * [""])
                     if isinstance(prompts, tuple):
                         prompts = list(prompts)
-                            for prompt in prompts:
+                        for prompt in prompts:
                                 if "||" in prompt:
                                     promptChoices = prompt.split("||")
                                     prompt = promptChoices[random.randint(0, len(promptChoices))]     
