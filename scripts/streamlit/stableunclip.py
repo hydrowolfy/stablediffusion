@@ -117,6 +117,10 @@ def sample(
                         uc = model.get_learned_conditioning(batch_size * [negative_prompt])
                     if isinstance(prompts, tuple):
                         prompts = list(prompts)
+                    for prompt in prompts:
+                        if "||" in prompt:
+                            promptChoices = prompt.split("||")
+                            prompt = promptChoices[random.randint(0, len(promptChoices))]                             
                     c = model.get_learned_conditioning(prompts)
 
                 if adm_cond is not None:
