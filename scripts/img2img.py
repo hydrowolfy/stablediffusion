@@ -3,6 +3,7 @@
 import argparse, os
 import PIL
 import torch
+import random
 import numpy as np
 from omegaconf import OmegaConf
 from PIL import Image
@@ -244,7 +245,7 @@ def main():
                         for prompt in prompts:
                                     if "||" in prompt:
                                         promptChoices = prompt.split("||")
-                                        prompt = promptChoices[random.randint(0, len(promptChoices))]     
+                                        prompt = promptChoices[random.randint(0, len(promptChoices)-1)]     
                         c = model.get_learned_conditioning(prompts)
 
                         # encode (scaled latent)

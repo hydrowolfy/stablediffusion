@@ -317,7 +317,7 @@ def main(opt):
         for prompt in prompts:
             if "||" in prompt:
                 promptChoices = prompt.split("||")
-                prompt = promptChoices[random.randint(0, len(promptChoices))]     
+                prompt = promptChoices[random.randint(0, len(promptChoices)-1)]     
         with torch.no_grad(), additional_context:
             for _ in range(3):
                 c = model.get_learned_conditioning(prompts)
@@ -347,9 +347,9 @@ def main(opt):
                     if isinstance(prompts, tuple):
                         prompts = list(prompts)
                     for prompt in prompts:
-                                if "||" in prompt:
-                                    promptChoices = prompt.split("||")
-                                    prompt = promptChoices[random.randint(0, len(promptChoices))]     
+                        if "||" in prompt:
+                            promptChoices = prompt.split("||")
+                            prompt = promptChoices[random.randint(0, len(promptChoices)-1)]     
                     c = model.get_learned_conditioning(prompts)
                     shape = [opt.C, opt.H // opt.f, opt.W // opt.f]
                     samples, _ = sampler.sample(S=opt.steps,

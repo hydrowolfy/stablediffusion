@@ -1,4 +1,5 @@
 import importlib
+import random
 import streamlit as st
 import torch
 import cv2
@@ -120,7 +121,7 @@ def sample(
                     for prompt in prompts:
                         if "||" in prompt:
                             promptChoices = prompt.split("||")
-                            prompt = promptChoices[random.randint(0, len(promptChoices))]                             
+                            prompt = promptChoices[random.randint(0, len(promptChoices)-1)]                             
                     c = model.get_learned_conditioning(prompts)
 
                 if adm_cond is not None:
