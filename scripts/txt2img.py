@@ -1,5 +1,6 @@
 import argparse, os
 import cv2
+import random
 import torch
 import numpy as np
 from omegaconf import OmegaConf
@@ -313,7 +314,12 @@ def main(opt):
             uc = model.get_learned_conditioning(batch_size * [""])
         if isinstance(prompts, tuple):
             prompts = list(prompts)
+        for prompt in prompts:
+            if "||" in prompt:
+                promptChoices = prompt.split("||")
+                prompt = promptChoices[random.randint(0, len(promptChoices))]
 
+            
         with torch.no_grad(), additional_context:
             for _ in range(3):
                 c = model.get_learned_conditioning(prompts)
